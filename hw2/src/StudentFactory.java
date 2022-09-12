@@ -1,8 +1,8 @@
 import java.util.Random;
 
 public class StudentFactory {
+    private static Random random = new Random();
     public static HogwartsStudent createStudent(House faculty, String name){
-        Random random = new Random();
         switch (faculty){
             case GRYFFINDOR -> {
                 return new GryffindorStudent(name, random.ints(5, 1, 100).toArray());

@@ -46,7 +46,9 @@ public class Main {
         System.out.println();
         System.out.println(chouChang);
         System.out.println(gregoryGoyle);
-        chouChang.compareApparationTo(gregoryGoyle);
+        chouChang.compareMagicTo(gregoryGoyle);
 
+        RavenclawStudent someStudent = (RavenclawStudent) StudentFactory.createStudent(House.RAVENCLAW, "Имя");
+        System.out.println(someStudent);
     }
 }
