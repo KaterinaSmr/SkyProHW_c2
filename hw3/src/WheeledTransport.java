@@ -16,7 +16,14 @@ public abstract class WheeledTransport {
     }
 
     public void updateTyre() {
-        System.out.println("Меняем покрышку");
+        for (int i = 0; i < this.getWheelsCount(); i++) {
+            System.out.println("Меняем покрышку");
+        }
+    }
+    protected void updateTyre(String transportType) {
+        for (int i = 0; i < this.getWheelsCount(); i++) {
+            System.out.println("Меняем покрышку " + transportType);
+        }
     }
 
 }
