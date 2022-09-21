@@ -10,7 +10,7 @@ import java.util.*;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
-    private Map<String, Employee> employees;
+    private final Map<String, Employee> employees;
 
     public EmployeeServiceImpl() {
         employees = new HashMap<>();

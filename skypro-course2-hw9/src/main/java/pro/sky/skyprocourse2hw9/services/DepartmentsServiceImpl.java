@@ -31,20 +31,21 @@ public class DepartmentsServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Map<Integer, List<Employee>> getAllEmployeesForDepartment(int department) {
-        List<Employee> list= employees.index().values().stream()
+    public List<Employee> getAllEmployeesForDepartment(int department) {
+        return employees.index().values().stream()
                 .filter(e-> e.getDepartment() == department)
                 .collect(Collectors.toList());
-        return new HashMap<>(Map.of(department, list));
     }
 
     @Override
     public Map<Integer, List<Employee>> getEmployeesByDepartments(){
         return employees.index().values().stream()
-                .collect(Collectors.toMap(Employee::getDepartment, e -> new ArrayList<>(List.of(e)), (l1, l2) -> {
-                    l1.addAll(l2);
-                    return l1;
-                }));
+                .collect(Collectors.groupingBy(Employee::getDepartment));
+//        return employees.index().values().stream()
+//                .collect(Collectors.toMap(Employee::getDepartment, e -> new ArrayList<>(List.of(e)), (l1, l2) -> {
+//                    l1.addAll(l2);
+//                    return l1;
+//                }));
     }
 
 /* Не очень понятно из описания задания нужны эти методы или нет, но на всякий случай сделала */
