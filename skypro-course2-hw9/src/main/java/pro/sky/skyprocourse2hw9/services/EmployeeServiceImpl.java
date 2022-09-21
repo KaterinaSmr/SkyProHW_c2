@@ -43,10 +43,11 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new DepartmentNotFoundException(department);
         }
         Employee employee = new Employee(firstName, lastName, department, salary);
-        if (employees.containsKey(generateKey(employee))){
+        String key = generateKey(employee);
+        if (employees.containsKey(key)){
             throw new EmployeeAlreadyAddedException();
         }
-        employees.put(generateKey(employee), employee);
+        employees.put(key, employee);
         return employee;
     }
     @Override
