@@ -6,12 +6,11 @@ import org.springframework.web.context.annotation.SessionScope;
 import java.util.List;
 
 @Service
-@SessionScope
 public class CartServiceImpl implements CartService {
     private Cart cart;
 
-    public CartServiceImpl(){
-        cart = new Cart();
+    public CartServiceImpl(Cart cart){
+        this.cart = cart;
     }
 
     @Override
