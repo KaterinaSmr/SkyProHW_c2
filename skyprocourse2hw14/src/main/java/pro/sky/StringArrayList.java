@@ -24,6 +24,9 @@ public class StringArrayList implements StringList{
         if (size >= capacity){
             growArray();
         }
+        if (item == null){
+            throw new StringArrayListNullItemNotAllowed();
+        }
         data[size] = item;
         size++;
         return item;
@@ -33,6 +36,9 @@ public class StringArrayList implements StringList{
     public String add(int index, String item) {
         if (index >= size){
             throw new StringArrayListIndexOutOfBoundsException(String.valueOf(index));
+        }
+        if (item == null){
+            throw new StringArrayListNullItemNotAllowed();
         }
         if (size >= capacity){
             growArray();
@@ -73,6 +79,9 @@ public class StringArrayList implements StringList{
         if (index >= size){
             throw new StringArrayListIndexOutOfBoundsException(String.valueOf(index));
         }
+        if (item == null){
+            throw new StringArrayListNullItemNotAllowed();
+        }
         String temp = data[index];
         data[index] = item;
         return temp;
@@ -83,6 +92,9 @@ public class StringArrayList implements StringList{
         int index = indexOf(item);
         if (index < 0){
             throw new StringArrayListElementNotFoundException(item);
+        }
+        if (item == null){
+            throw new StringArrayListNullItemNotAllowed();
         }
         return remove(index);
     }
@@ -99,11 +111,17 @@ public class StringArrayList implements StringList{
 
     @Override
     public boolean contains(String item) {
+        if (item == null){
+            throw new StringArrayListNullItemNotAllowed();
+        }
         return indexOf(item) >= 0;
     }
 
     @Override
     public int indexOf(String item) {
+        if (item == null){
+            throw new StringArrayListNullItemNotAllowed();
+        }
         for (int i = 0; i < size; i++) {
             if (data[i].equals(item)){
                 return i;
@@ -114,6 +132,9 @@ public class StringArrayList implements StringList{
 
     @Override
     public int lastIndexOf(String item) {
+        if (item == null){
+            throw new StringArrayListNullItemNotAllowed();
+        }
         for (int i = size-1; i >= 0; i--) {
             if (data[i].equals(item)){
                 return i;
