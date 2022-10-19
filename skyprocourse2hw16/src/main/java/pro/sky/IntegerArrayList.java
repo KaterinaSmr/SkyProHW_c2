@@ -6,7 +6,7 @@ public class IntegerArrayList implements IntegerList {
     private Integer[] data;
     private int capacity;
     private static final int DEFAULT_CAPACITY = 10;
-    private static final float GROW_RATE = 1.25f;
+    private static final float GROW_RATE = 1.5f;
     private int size;
 
     public IntegerArrayList(int capacity) {
@@ -22,7 +22,7 @@ public class IntegerArrayList implements IntegerList {
     @Override
     public Integer add(Integer item) {
         if (size >= capacity){
-            growArray();
+            grow();
         }
         if (item == null){
             throw new IntegerArrayListNullItemNotAllowed();
@@ -41,7 +41,7 @@ public class IntegerArrayList implements IntegerList {
             throw new IntegerArrayListNullItemNotAllowed();
         }
         if (size >= capacity){
-            growArray();
+            grow();
         }
         shiftArray(index);
         data[index] = item;
@@ -69,7 +69,7 @@ public class IntegerArrayList implements IntegerList {
         size--;
     }
 
-    private void growArray(){
+    private void grow(){
         capacity = (int) (capacity * GROW_RATE) + 1;
         data = Arrays.copyOf(data, capacity);
     }
