@@ -68,7 +68,8 @@ public class Main {
         LocalDate taskDate = inputDate(scanner);
         Periodicity periodicity = inputPeriodicity(scanner);
 
-        taskService.addTask(taskName, taskDescription, taskType, taskDate, periodicity);
+        Task task = new Task(taskName, taskDescription, taskType, taskDate, periodicity);
+        taskService.addTask(task);
     }
 
     private static Periodicity inputPeriodicity(Scanner scanner) {

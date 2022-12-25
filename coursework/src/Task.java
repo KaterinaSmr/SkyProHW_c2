@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 
 public class Task {
+    private static int taskCount = 0;
 
     private int id;
     private String title;
@@ -9,11 +10,11 @@ public class Task {
     private LocalDate date;
     private Periodicity periodicity;
 
-    public Task(int id, String title, String description, TaskType taskType, LocalDate date, Periodicity periodicity) {
+    public Task(String title, String description, TaskType taskType, LocalDate date, Periodicity periodicity) {
         if (title == null || description == null || taskType == null || periodicity == null){
             throw new IllegalArgumentException("Заголовок, описание, тип и признак повторяемости обязательны к заполнению");
         }
-        this.id = id;
+        this.id = ++taskCount;
         this.title = title;
         this.description = description;
         this.taskType = taskType;

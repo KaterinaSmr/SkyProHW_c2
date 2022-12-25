@@ -4,30 +4,27 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class TaskService {
-    private HashMap<Integer, Task> taskManager;
-    private HashMap<Integer, Task> archivedTasks;
-    private static int taskCount = 0;
+    private Map<Integer, Task> taskManager;
+    private Map<Integer, Task> archivedTasks;
+//    private static int taskCount = 0;
 
     public TaskService() {
         this.taskManager = new HashMap<>();
         this.archivedTasks = new HashMap<>();
-        this.addTask("Сделать курсовую", "Выполнить курсовую работу", TaskType.WORK,
-                LocalDate.of(2022, 12, 23), Periodicity.SINGLE);
-        this.addTask("Учеба", "Позаниматься учебой", TaskType.WORK,
-                LocalDate.of(2022, 12, 23), Periodicity.DAILY);
-        this.addTask("Заплатить за кв", "Заплатить за квартиру", TaskType.PERSONAL,
-                LocalDate.of(2022,12, 2), Periodicity.MONTHLY);
-        this.addTask("Встретить НГ", "Отпразновать наступление Нового года", TaskType.PERSONAL,
-                LocalDate.of(2022, 12, 31), Periodicity.YEARLY);
-        this.addTask("Отдых", "Устроить выходной", TaskType.PERSONAL,
-                LocalDate.of(2022, 12, 24), Periodicity.WEEKLY);
-
+        this.addTask(new Task("Сделать курсовую", "Выполнить курсовую работу", TaskType.WORK,
+                LocalDate.of(2022, 12, 23), Periodicity.SINGLE));
+        this.addTask(new Task("Учеба", "Позаниматься учебой", TaskType.WORK,
+                LocalDate.of(2022, 12, 23), Periodicity.DAILY));
+        this.addTask(new Task("Заплатить за кв", "Заплатить за квартиру", TaskType.PERSONAL,
+                LocalDate.of(2022,12, 2), Periodicity.MONTHLY));
+        this.addTask(new Task("Встретить НГ", "Отпразновать наступление Нового года", TaskType.PERSONAL,
+                LocalDate.of(2022, 12, 31), Periodicity.YEARLY));
+        this.addTask(new Task("Отдых", "Устроить выходной", TaskType.PERSONAL,
+                LocalDate.of(2022, 12, 24), Periodicity.WEEKLY));
     }
 
-    public void addTask(String taskName, String taskDescription, TaskType taskType, LocalDate taskDate, Periodicity periodicity){
-        int taskId = ++taskCount;
-        Task task = new Task(taskId, taskName, taskDescription, taskType, taskDate, periodicity);
-        taskManager.put(taskId, task);
+    public void addTask(Task task){
+        taskManager.put(task.getId(), task);
     }
 
     public boolean removeTask(int id){
