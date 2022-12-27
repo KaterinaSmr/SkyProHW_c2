@@ -1,32 +1,42 @@
 package pro.sky.coursework2.services;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import pro.sky.coursework2.WrongQuestionsAmountException;
 import pro.sky.coursework2.models.Question;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class ExaminerServiceImpl implements ExaminerService{
 
-    private final QuestionService questionService;
+    private final QuestionService javaQuestionService;
+    private final QuestionService mathQuestionService;
 
-    public ExaminerServiceImpl(QuestionService questionService) {
-        this.questionService = questionService;
+    public ExaminerServiceImpl(@Qualifier("javaQuestionService") QuestionService javaQuestionService,
+                                @Qualifier("mathQuestionService") QuestionService mathQuestionServcie) {
+        this.javaQuestionService = javaQuestionService;
+        this.mathQuestionService = mathQuestionServcie;
     }
 
     @Override
     public Collection<Question> getQuestions(int amount) {
-        int size = questionService.getAll().size();
-        if (size < amount){
+        Set<Question> allQuestions = new HashSet<>();
+        allQuestions.addAll(javaQuestionService.getAll());
+        allQuestions.addAll(mathQuestionService.getAll());
+        int size = allQuestions.size();
+        if (size < amount || amount < 0){
             throw new WrongQuestionsAmountException(amount, size);
         }
-        Set<Question> questions = new HashSet<>();
-        while (questions.size() < amount){
-            questions.add(questionService.getRandomQuestion());
+
+        Random random = new Random();
+        Question[] allQuestionsArray = allQuestions.toArray(new Question[0]);
+
+        Set<Question> result = new HashSet<>();
+        while (result.size() < amount){
+            int randomIndex = random.nextInt(size);
+            result.add(allQuestionsArray[randomIndex]);
         }
-        return questions;
+        return result;
     }
 }

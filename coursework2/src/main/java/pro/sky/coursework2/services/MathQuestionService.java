@@ -9,11 +9,11 @@ import pro.sky.coursework2.repositories.QuestionRepository;
 import java.util.*;
 
 @Service
-@Qualifier("javaQuestionService")
-public class JavaQuestionService implements QuestionService {
+@Qualifier("mathQuestionService")
+public class MathQuestionService implements QuestionService {
     private final QuestionRepository questionRepository;
 
-    public JavaQuestionService(@Qualifier("javaQuestionRepository") QuestionRepository questionRepository) {
+    public MathQuestionService(@Qualifier("mathQuestionRepository") QuestionRepository questionRepository) {
         this.questionRepository = questionRepository;
     }
 

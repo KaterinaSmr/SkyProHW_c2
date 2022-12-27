@@ -8,11 +8,11 @@ import java.util.Collection;
 
 @RestController
 @RequestMapping("/exam")
-public class ExamContorller {
+public class ExamController {
 
     private final ExaminerService examinerService;
 
-    public ExamContorller(ExaminerService examinerService) {
+    public ExamController(ExaminerService examinerService) {
         this.examinerService = examinerService;
     }
 
